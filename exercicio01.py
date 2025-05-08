@@ -1,76 +1,62 @@
-class Pessoa():
-    def __init__(self, nome, idade, peso,falando,comendo,dormindo):
-        self.nome=nome
-        self.idade=idade
-        self.peso=peso
-        self.falando=False
-        self.comendo=False
-        self.dormindo=False
-    def falar(self):
-        if self.falando==True:
-            print("ele já está falando.")
+class Conta:
+    def __init__(self, numero_conta,nome_cliente,tipo_conta):
+        self.limite=0
+        self.numero_conta=numero_conta
+        self.saldo=0
+        self.status_conta=True
+        self.nome_cliente=nome_cliente
+        self.tipo_conta=tipo_conta
+    def sacar(self,saque):
+        if self.status_conta==False:
+            print(f"conta está desativada")
         else:
-            if self.comendo==True:
-                print("esta de boca cheia, não pode falar enquanto come.")
+            if saque>self.saldo:
+                print("saldo insuficiente.")
             else:
-                if self.dormindo==True:
-                    print("não pode falar pq ja esta roncando.")
-                else:
-                    if self.falando==False:
-                        print(f"{self.nome} começou a falar")
-                        self.falando=True
-    def calar(self):
-        if self.falando==True:
-            self.falando=False
-            print(f"{self.nome} parou de falar")
+                self.saldo-=saque
+                print(f"{self.nome_cliente} sacou: R${saque}")
+    def receber_limite(self,limite):
+        self.limite+=limite
+    def depositar(self,deposito):
+        if self.status_conta==False:
+            print(f"conta está desativada")
         else:
-            print(f"{self.nome} não está  falando.")
-    def comer(self,comida):
-        if self.comendo==True:
-            print("ele já esta comendo.")
+            self.saldo+=deposito
+            print(f"deposito de : R${deposito}\nsaldo atual de: R${self.saldo}")
+    def ver_saldo(self):
+        if self.status_conta==False:
+            print("conta desativada.")
         else:
-            if self.dormindo==True:
-                print("não pode comer enquanto dorme.")
+            print(f"seu saldo é de: {self.saldo}")
+    def desativar(self):
+        if self.saldo==0 and self.status_conta==True:
+            self.status_conta=False
+            print("sua conta foi desativada com sucesso.")
+        else:
+            if self.saldo>0:
+                print("não foi possivel desativar sua conta, você ainda tem dinheiro em conta.")
             else:
-                if self.falando==True:
-                    print("não pode falar enquanto come.")
+                if self.saldo<0:
+                    print("não foi possivel desativar sua conta, seu saldo está negativo.")
                 else:
-                    if self.comendo==False:
-                        print(f"{self.nome} começou a comer {comida}.")
-    def dormir(self):
-        if self.dormir==True:
-            print("não da pra dormir  duas vezes.")
+                    print("sua conta já está desativada.")
+    def ativar(self):
+        if self.status_conta == False:
+            self.status_conta = True
+            print("sua conta foi ativada.")
         else:
-            if self.comendo==True:
-                print("nao pode dormir enquanto come.")
-            else:
-                if self.falando==True:
-                    print("não pode dormir enquanto fala.")
-                else:
-                    if self.dormir==False:
-                        print(f"{self.nome} começou a dormir")
-                        self.dormir=True
-    def acordar(self):
-        if self.dormindo==True:
-            self.dormindo=False
-            print(f"{self.nome} acordou")
+                print("sua conta ja esta ativada")
+    def info(self):
+        if self.status_conta==True:
+            print(f"nome usuario: {self.nome_cliente}")
+            print(f"numero da conta: {self.numero_conta}")
+            print(f"tipo da conta: {self.tipo_conta}")
+            print(f"saldo: R${self.saldo}")
+            print(f"status da conta: ativa")
         else:
-            print("ele não está dormindo.")
-    def parar_comer(self):
-        if self.comendo==True:
-            self.comendo=False
-            print(f"{self.nome} parou de comer.")
-        else:
-            print(f"{self.nome} ja esta comendo.")
-
-
-
-
-
-
-
-
-aluno01=Pessoa("iure",19,73,False,False,False)
-aluno01.falar()
-aluno01.dormir()
-aluno01.comer("pipoca")
+            print(f"nome usuario: {self.nome_cliente}")
+            print(f"numero da conta: {self.numero_conta}")
+            print(f"tipo da conta: {self.tipo_conta}")
+            print(f"saldo: R${self.saldo}")
+            print(f"status da conta: desativada")
+usuario01=Conta(11,"iure","poupança")
