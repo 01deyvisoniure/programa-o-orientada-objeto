@@ -15,8 +15,6 @@ class Conta:
             else:
                 self.saldo-=saque
                 print(f"{self.nome_cliente} sacou: R${saque}")
-    def receber_limite(self,limite):
-        self.limite+=limite
     def depositar(self,deposito):
         if self.status_conta==False:
             print(f"conta está desativada")
@@ -60,3 +58,6 @@ class Conta:
             print(f"saldo: R${self.saldo}")
             print(f"status da conta: desativada")
 usuario01=Conta(11,"iure","poupança")
+escolha=0
+while escolha!=7:
+
